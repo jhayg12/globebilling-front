@@ -60,13 +60,20 @@ export class UserlistComponent {
 
       // Convert Array to Object Type
       const data = Object.keys(_data).map(i => _data[i]); 
- 
-      // Get the role value from object
+      const role = Object.keys(_data).map(i => _data[i].role);
+
+      // Get the role value
+      for (let i=0; i<role.length; i++) {
+        data[i].role = role[i].role;
+      }
+      
+      // Convert the status to readable one
       for (let i=0; i<data.length; i++) {
-        const role = Object.keys(data).map(i => data[i].role);
-        for (let i=0; i<role.length; i++) {
-          data[i].role = role[i].role;
+        if (data[i].status != 1) {
+          data[i].status = 'Inactive';
+          break;
         }
+        data[i].status = 'Active';
       }
 
       this.source.load(data);
