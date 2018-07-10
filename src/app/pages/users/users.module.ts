@@ -5,6 +5,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { UsersRoutingModule, routedComponents } from './users-routing.module';
 import { SmartTableService } from '../../@core/data/smart-table.service';
 import { UserlistComponent } from './userlist/userlist.component';
+import { UserlogoutComponent } from './userlogout.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { UserlistComponent } from './userlist/userlist.component';
   declarations: [
     ...routedComponents,
     UserlistComponent,
+    UserlogoutComponent
   ],
   providers: [
     SmartTableService,
