@@ -15,6 +15,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { AuthGuard } from '../app/auth-guard.service';
+
+// import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '@nebular/auth';
+import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '../app/@theme/components/auth';
+import { UsersModule } from '../app/pages/users/users.module';
+
+const formSetting: any = {
+  redirectDelay: 0,
+  showMessages: {
+    success: true,
+  },
+};
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -22,14 +35,59 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    UsersModule,
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+
+          token: {
+            class: NbAuthJWTToken
+          },
+
+          baseEndpoint: 'http://localhost:3000/globebilling',
+          login: {
+            endpoint: '/auth/signin',
+            method: 'post',
+          },
+          register: {
+            endpoint: '/auth/signup',
+            method: 'post',
+          },
+          // logout: {
+          //   endpoint: '/auth/signout',
+          //   method: 'post',
+          // },
+          requestPass: {
+            endpoint: '/auth/forgot-password',
+            method: 'post',
+          },
+          resetPass: {
+            endpoint: '/auth/reset-pass',
+            method: 'post',
+          },
+
+        }),
+      ],
+      forms: {
+        login: formSetting,
+        register: formSetting,
+        requestPassword: formSetting,
+        resetPassword: formSetting,
+        logout: {
+          redirectDelay: 0,
+        },
+      },
+    }), 
   ],
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
+    AuthGuard
   ],
 })
 export class AppModule {
