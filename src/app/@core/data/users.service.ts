@@ -8,10 +8,11 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  baseUri = "http://localhost:4000/globebilling";
+  baseUri = "http://localhost:3000/globebilling";
 
   getUsers() {
     return this.http.get(`${this.baseUri}/users`);
   }
+
 
 }
