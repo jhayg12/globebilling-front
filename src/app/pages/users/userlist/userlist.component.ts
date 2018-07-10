@@ -31,8 +31,8 @@ export class UserlistComponent {
       confirmDelete: true,
     },
     columns: {
-      username: {
-        title: 'Username',
+      fullname: {
+        title: 'Fullname',
         type: 'string',
       },
       email: {
@@ -60,12 +60,6 @@ export class UserlistComponent {
 
       // Convert Array to Object Type
       const data = Object.keys(_data).map(i => _data[i]); 
-      const role = Object.keys(_data).map(i => _data[i].role);
-
-      // Get the role value
-      for (let i=0; i<role.length; i++) {
-        data[i].role = role[i].role;
-      }
       
       // Convert the status to readable one
       for (let i=0; i<data.length; i++) {
@@ -74,6 +68,13 @@ export class UserlistComponent {
           break;
         }
         data[i].status = 'Active';
+
+        // Check for the Role Value
+        if (data[i].role != null) {
+          const role = Object.keys(data).map(i => data[i].role);
+          data[i].role = role[i].role;
+        }
+
       }
 
       this.source.load(data);
