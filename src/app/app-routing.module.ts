@@ -1,5 +1,14 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+// import {
+//   NbAuthComponent,
+//   NbLoginComponent,
+//   NbLogoutComponent,
+//   NbRegisterComponent,
+//   NbRequestPasswordComponent,
+//   NbResetPasswordComponent,
+// } from '@nebular/auth';
+
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -7,7 +16,9 @@ import {
   NbRegisterComponent,
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
-} from '@nebular/auth';
+} from '../app/@theme/components/auth';
+
+import { UserlogoutComponent } from '../app/pages/users/userlogout.component';
 
 const routes: Routes = [
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
@@ -29,7 +40,7 @@ const routes: Routes = [
       },
       {
         path: 'logout',
-        component: NbLogoutComponent,
+        component: UserlogoutComponent,
       },
       {
         path: 'request-password',
