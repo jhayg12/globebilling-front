@@ -8,18 +8,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'Users Management',
-    icon: 'nb-person',
+    title: 'Settings',
+    icon: 'nb-gear',
     children: [
       {
         title: 'Users',
         icon: 'nb-chevron-right-outline',
-        link: '/pages/users/list',
+        link: '/pages/settings/users',
       },
       {
         title: 'Roles',
         icon: 'nb-chevron-right-outline',
-        link: '',
+        link: '/pages/settings/roles',
       },
     ],
   },
