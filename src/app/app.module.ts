@@ -20,7 +20,6 @@ import { AuthGuard } from '../app/auth-guard.service';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 // import { NbSecurityModule, NbRoleProvider } from '../app/@theme/components/security';
 import { RoleProvider } from '../app/@theme/components/security/role.provider';
-import { NgxPermissionsModule } from 'ngx-permissions';
 import { SettingsModule } from '../app/pages/settings/settings.module';
 
 
@@ -102,8 +101,6 @@ const formSetting: any = {
         },
       },
     }),
-
-    NgxPermissionsModule.forRoot(),
 
   ],
   bootstrap: [AppComponent],
