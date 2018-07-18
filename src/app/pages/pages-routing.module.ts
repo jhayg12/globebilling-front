@@ -11,9 +11,10 @@ const routes: Routes = [{
   children: [{
     path: 'dashboard',
     component: DashboardComponent,
-  }, {
-    path: 'users',
-    loadChildren: './users/users.module#UsersModule',
+  }, 
+  {
+    path: 'settings',
+    loadChildren: './settings/settings.module#SettingsModule',
   },
   // {
   //   path: 'ui-features',
