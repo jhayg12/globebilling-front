@@ -18,10 +18,14 @@ import {
   NbResetPasswordComponent,
 } from '../app/@theme/components/auth';
 
-import { UserlogoutComponent } from '../app/pages/users/userlogout.component';
+import { UserLogoutComponent } from '../app/pages/settings/users/user-logout.component';
+import { AuthGuard } from '../app/auth-guard.service';
 
 const routes: Routes = [
-  { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
+  { path: 'pages', 
+    loadChildren: 'app/pages/pages.module#PagesModule',
+    canActivate: [ AuthGuard ]
+  },
   {
     path: 'auth',
     component: NbAuthComponent,
@@ -40,7 +44,7 @@ const routes: Routes = [
       },
       {
         path: 'logout',
-        component: UserlogoutComponent,
+        component: UserLogoutComponent,
       },
       {
         path: 'request-password',
