@@ -14,12 +14,15 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-import { AuthGuard } from '../app/auth-guard.service';
-
 // import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '@nebular/auth';
 import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '../app/@theme/components/auth';
-import { UsersModule } from '../app/pages/users/users.module';
+import { AuthGuard } from '../app/auth-guard.service';
+import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
+// import { NbSecurityModule, NbRoleProvider } from '../app/@theme/components/security';
+import { RoleProvider } from '../app/@theme/components/security/role.provider';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { SettingsModule } from '../app/pages/settings/settings.module';
+
 
 const formSetting: any = {
   redirectDelay: 0,
@@ -35,7 +38,7 @@ const formSetting: any = {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    UsersModule,
+    SettingsModule,
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
@@ -83,11 +86,31 @@ const formSetting: any = {
         },
       },
     }), 
+
+    NbSecurityModule.forRoot({
+      accessControl: {
+        Viewer: {
+          view: ['user'],
+        },
+        Support: {
+          parent: 'Viewer',
+        },
+        Admin: {
+          parent: 'Support',
+          create: 'roles',
+          remove: '*',
+        },
+      },
+    }),
+
+    NgxPermissionsModule.forRoot(),
+
   ],
   bootstrap: [AppComponent],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
-    AuthGuard
+    { provide: APP_BASE_HREF, useValue: '/' }, 
+    AuthGuard,
+    { provide: NbRoleProvider, useClass: RoleProvider }, 
   ],
 })
 export class AppModule {
