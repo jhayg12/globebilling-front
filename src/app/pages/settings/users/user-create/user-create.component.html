@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header>
+        Add User
+      </nb-card-header>
+      <nb-card-body>
+        <form (ngSubmit)="addUser()" [formGroup]="userForm" autocomplete="nope">
+
+          <div *ngIf="error" class="alert alert-danger" role="alert">
+            <div>
+              <strong>Oh snap!</strong>
+            </div>
+            <div *ngFor="let message of messages">{{ message.message }}</div>
+          </div>
+
+          <div *ngIf="userForm.valid && success" class="alert alert-success" role="alert">
+            <div>
+              <strong>Hooray!</strong>
+            </div>
+            <div>{{ messages }}</div>
+          </div>
+
+          <div class="form-group">
+            <label for="input-text">Username</label>
+            <input type="text" class="form-control" id="title" formControlName="username" name="username" #username [class.form-control-danger]="f.username.errors && (f.username.dirty || f.username.touched)">
+            <div *ngIf="f.username.errors && (f.username.dirty || f.username.touched)">
+              <small class="form-text error" [hidden]="!f.username.errors.required">
+                Username is required!
+              </small>
+              <small class="form-text error" [hidden]="!f.username.errors.minlength">
+                Username must be at least 5 characters long.
+              </small>
+              <small class="form-text error" [hidden]="!f.username.errors.maxlength">
+                Username cannot be more than 30 characters long.
+              </small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="input-text">Fullname</label>
+            <input type="text" name="fullname" id="fullname" class="form-control" [class.form-control-danger]="f.fullname.errors && (f.fullname.dirty || f.fullname.touched)"
+              formControlName="fullname" #fullname>
+            <div *ngIf="f.fullname.errors && (f.fullname.dirty || f.fullname.touched)">
+              <small class="form-text error" [hidden]="!f.fullname.errors.required">
+                Fullname is required!
+              </small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="input-email">Email</label>
+            <input type="email" class="form-control" [class.form-control-danger]="f.email.errors && (f.email.dirty || f.email.touched)"
+              id="email" formControlName="email" name="email" #email>
+            <div *ngIf="f.email.errors && (f.email.dirty || f.email.touched)">
+              <small class="form-text error" [hidden]="!f.email.errors.required">
+                Email is required!
+              </small>
+              <small class="form-text error" [hidden]="!f.email.errors.email">
+                Email should be the real one!
+              </small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="select">Role</label>
+            <select class="form-control" name="role" formControlName="role" #role [class.form-control-danger]="f.role.errors && (f.role.dirty || f.role.touched)">
+              <option value="null" disabled selected></option>
+              <option *ngFor="let role of roles" [(ngValue)]="role._id">{{role.roleName}}</option>
+            </select>
+            <div *ngIf="f.role.errors && (f.role.dirty || f.role.touched)">
+              <small class="form-text error" [hidden]="!f.role.errors.required">
+                Role is required!
+              </small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="input-password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" [class.form-control-danger]="f.password.errors && (f.password.dirty || f.password.touched)"
+              #password formControlName="password">
+            <div *ngIf="f.password.errors && (f.password.dirty || f.password.touched)">
+              <small class="form-text error" [hidden]="!f.password.errors.required">
+                Password is required!
+              </small>
+              <small class="form-text error" [hidden]="!f.password.errors.minlength">
+                Password must be at least 8 characters long.
+              </small>
+              <small class="form-text error" [hidden]="!f.password.errors.maxlength">
+                Password cannot be more than 30 characters long.
+              </small>
+            </div>
+          </div>
+
+          <div>
+            <button [disabled]="submitted || !userForm.valid" class="btn btn-hero-success" [class.btn-pulse]="submitted">
+              Submit
+            </button>&nbsp;
+            <button type="reset" class="btn btn-danger">Reset</button>
+            <button (click)="userLists()" class="btn btn-hero-secondary pull-right">Back</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

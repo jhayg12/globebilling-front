@@ -1,0 +1,16 @@
+<nb-card accent="corporate">
+  <nb-card-header>
+    Roles
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+    </ng2-smart-table>
+      <br>   
+      <button class="btn btn-success pull-right" (click)="addRole()">Add Role</button>
+  </nb-card-body>
+</nb-card>
+    
+    <!-- <nb-menu [items]="menu" class="col-6 col-md-4"></nb-menu>
+    <router-outlet></router-outlet> -->
+
