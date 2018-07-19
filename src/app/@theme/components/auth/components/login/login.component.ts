@@ -16,7 +16,7 @@ import { NbAuthResult } from '../../services/auth-result';
   template: `
     <nb-auth-block>
       <h2 class="title">Sign In</h2>
-      <small class="form-text sub-title">Hello! Sign in with your username or email</small>
+      <small class="form-text sub-title">Hello! Sign in with your email and password</small>
 
       <form (ngSubmit)="login()" #form="ngForm" autocomplete="nope">
 
